@@ -4,7 +4,7 @@
 ## Introduction
 Game development project using SFML library on C++ for 01076002 Programming Fundamental computer engineering King Mongkut's Institute of Technology Ladkrabang.
 - Demo clip : https://www.youtube.com/watch?v=Mbl7fE_P_0k
-- File Game (Release version) : https://drive.google.com/file/d/197ZsPJS9JzrFYf9cLwCKLg439YIoMMBq/view?usp=sharing
+- File Game (Release version base window) : https://drive.google.com/file/d/197ZsPJS9JzrFYf9cLwCKLg439YIoMMBq/view?usp=sharing
 
 
 ## About this game
