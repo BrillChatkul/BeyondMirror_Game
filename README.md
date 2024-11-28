@@ -30,3 +30,7 @@ Ending
 
 ## Product by
 Chatkul Rattnarithikul
+
+## Pre-installation macOS 
+- sfml, sfeMovie
+- sfeMovie https://sfemovie.yalir.org/latest/
