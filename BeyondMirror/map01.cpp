@@ -6,7 +6,7 @@ map01::map01()
 {
 	////Exmap texture
 	maprec.setSize(sf::Vector2f(10000.0f, 10000.0f));
-	map.loadFromFile("texture/map/mapLVL0/Map01.png");
+	map.loadFromFile("../Resources/texture/map/mapLVL0/Map01.png");
 	maprec.setTexture(&map);
 
 	wall.setSize(sf::Vector2f(100.0f, 100.0f));
@@ -42,7 +42,7 @@ map01::map01()
 	}
 	////Exmap1 texture
 	maprec1.setSize(sf::Vector2f(10000.0f, 10000.0f));
-	map1.loadFromFile("texture/map/mapLVL0/Map01_2.png");
+	map1.loadFromFile("../Resources/texture/map/mapLVL0/Map01_2.png");
 	maprec1.setTexture(&map1);
 
 	startgame.setSize(sf::Vector2f(100.0f, 100.0f));
@@ -68,7 +68,7 @@ map01::map01()
 	noteshow1.setSize(sf::Vector2f(450, 800));
 	noteshow1.setOrigin(noteshow1.getSize() / 2.f);
 	noteshow1.setPosition(800, 450);
-	note1tx.loadFromFile("texture/map/mapLVL0/note.png");
+	note1tx.loadFromFile("../Resources/texture/map/mapLVL0/note.png");
 	noteshow1.setTexture(&note1tx);
 
 	note2.setSize(sf::Vector2f(100.f, 100.f));
@@ -77,10 +77,10 @@ map01::map01()
 	noteshow2.setSize(sf::Vector2f(450, 800));
 	noteshow2.setOrigin(noteshow2.getSize() / 2.f);
 	noteshow2.setPosition(800, 450);
-	note2tx.loadFromFile("texture/map/mapLVL0/Note2.png");
+	note2tx.loadFromFile("../Resources/texture/map/mapLVL0/Note2.png");
 	noteshow2.setTexture(&note2tx);
 
-	fontgame.loadFromFile("font/EkkamaiNew-Regular.ttf");
+	fontgame.loadFromFile("../Resources/font/EkkamaiNew-Regular.ttf");
 	Interect.setCharacterSize(50);
 	Interect.setFont(fontgame);
 	Interect.setFillColor(sf::Color::White);
@@ -89,21 +89,21 @@ map01::map01()
 	Interect.setPosition(800, 650);
 
 	////sound
-	piano.loadFromFile("Bgmusic/Lv0paino.wav");
+	piano.loadFromFile("../Resources/Bgmusic/Lv0paino.wav");
 	opening.setBuffer(piano);
 
-	glass.loadFromFile("Bgmusic/glass.wav");
+	glass.loadFromFile("../Resources/Bgmusic/glass.wav");
 	Glasseffect.setBuffer(glass);
 
-	zone1Sound.loadFromFile("Bgmusic/LV0soundBegin.wav");
+	zone1Sound.loadFromFile("../Resources/Bgmusic/LV0soundBegin.wav");
 	zone1.setBuffer(zone1Sound);
 
-	PaperSound.loadFromFile("Bgmusic/PaperSound.wav");
+	PaperSound.loadFromFile("../Resources/Bgmusic/PaperSound.wav");
 	Paper.setBuffer(PaperSound);
 
-	chasesf.loadFromFile("Bgmusic/chase.wav");
-	chaseEdsf.loadFromFile("Bgmusic/chaseEd.wav");
-	wardropesf.loadFromFile("Bgmusic/wardrope.wav");
+	chasesf.loadFromFile("../Resources/Bgmusic/chase.wav");
+	chaseEdsf.loadFromFile("../Resources/Bgmusic/chaseEd.wav");
+	wardropesf.loadFromFile("../Resources/Bgmusic/wardrope.wav");
 
 	chase.setBuffer(chasesf);
 	chaseEd.setBuffer(chaseEdsf);

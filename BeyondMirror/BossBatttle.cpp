@@ -12,14 +12,14 @@ BossBatttle::BossBatttle()
 	wardrope.setSize(sf::Vector2f(100.0f, 100.0f));
 
 	////health
-	HealthHp.loadFromFile("texture/HpPotion.png");
+	HealthHp.loadFromFile("../Resources/texture/HpPotion.png");
 	healthDrope.setSize(sf::Vector2f(50.0f, 50.0f));
 	//healthDrope.setFillColor(sf::Color(195, 105, 105, 150));
 	healthDrope.setTexture(&HealthHp);
 
 	////Exmap 2floor texture
 	maprec.setSize(sf::Vector2f(10000.0f, 10000.0f));
-	map.loadFromFile("texture/map/Bossfight/PrebossFight.png");
+	map.loadFromFile("../Resources/texture/map/Bossfight/PrebossFight.png");
 	maprec.setTexture(&map);
 
 	////Exmap 2floor array
@@ -38,7 +38,7 @@ BossBatttle::BossBatttle()
 
 	////Exmap 1floor texture
 	maprec1.setSize(sf::Vector2f(10000.0f, 10000.0f));
-	map1.loadFromFile("texture/map/Bossfight/BossFight.png");
+	map1.loadFromFile("../Resources/texture/map/Bossfight/BossFight.png");
 	maprec1.setTexture(&map1);
 
 	////Exmap 2floor array
@@ -62,7 +62,7 @@ BossBatttle::BossBatttle()
 	}
 
 	/////interect
-	fontgame.loadFromFile("font/EkkamaiNew-Regular.ttf");
+	fontgame.loadFromFile("../Resources/font/EkkamaiNew-Regular.ttf");
 	Interect.setCharacterSize(50);
 	Interect.setFont(fontgame);
 	Interect.setFillColor(sf::Color::White);
@@ -70,11 +70,11 @@ BossBatttle::BossBatttle()
 	Interect.setOrigin(Interect.getGlobalBounds().width / 2.f, Interect.getGlobalBounds().height / 2.f);
 	Interect.setPosition(800, 650);
 
-	bgBeginsf.loadFromFile("Bgmusic/BeginFinalBoss.wav");
-	fightsf.loadFromFile("Bgmusic/finalBoss.wav");
-	PreBeginsf.loadFromFile("Bgmusic/PreBegin.wav");
+	bgBeginsf.loadFromFile("../Resources/Bgmusic/BeginFinalBoss.wav");
+	fightsf.loadFromFile("../Resources/Bgmusic/finalBoss.wav");
+	PreBeginsf.loadFromFile("../Resources/Bgmusic/PreBegin.wav");
 	
-	wardropesf.loadFromFile("Bgmusic/wardrope.wav");
+	wardropesf.loadFromFile("../Resources/Bgmusic/wardrope.wav");
 
 	bgBegin.setBuffer(bgBeginsf);
 	fight.setBuffer(fightsf);
@@ -92,8 +92,12 @@ BossBatttle::BossBatttle()
 	checkchangeMap.setFillColor(sf::Color(105, 195, 105, 150));
 
 	////intro video
-	Trueintro.openFromFile("video/Chapter3.mp4");
+	Trueintro.openFromFile("../Resources/video/Chapter3.mp4");
 	Trueintro.fit(0, 0, 1600, 900);
+
+	bgTrueintrosf.loadFromFile("../Resources/video/Chapter3.wav");
+	bgTrueintro.setBuffer(bgTrueintrosf);
+	bgTrueintro.setVolume(100);
 	
 
 	////choose player
@@ -108,7 +112,7 @@ BossBatttle::BossBatttle()
 	blink.setSize(sf::Vector2f(1600, 900));
 	blink.setPosition(0, 0);
 	blink.setFillColor(sf::Color::White);
-	Chose.loadFromFile("texture/map/Bossfight/YourChose.png");
+	Chose.loadFromFile("../Resources/texture/map/Bossfight/YourChose.png");
 	blink.setTexture(&Chose);
 
 	////sensor
@@ -274,6 +278,7 @@ void BossBatttle::cheackcolliderwall(sf::RectangleShape &Player,sf::RectangleSha
 		SetupBossfight = false;
 		PreLastfight = false;
 		Trueintro.play();
+		bgTrueintro.play();
 		playvideo = true;
 	}
 	if(playvideo == true){
@@ -282,6 +287,7 @@ void BossBatttle::cheackcolliderwall(sf::RectangleShape &Player,sf::RectangleSha
 		if (Trueintro.getStatus() != sfe::Status::Playing || sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
 			playvideo = false;
 			Trueintro.stop();
+			bgTrueintro.stop();
 			if (havedoll == 1)
 			{
 				choose = true;

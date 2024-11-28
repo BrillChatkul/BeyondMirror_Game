@@ -21,13 +21,13 @@ player::player(sf::RectangleShape &Playercharacter, sf::Texture *playerTexture) 
 
 	Playercharacter.setTexture(playerTexture);
 	
-	fontgame.loadFromFile("font/EkkamaiNew-Regular.ttf");
+	fontgame.loadFromFile("../Resources/font/EkkamaiNew-Regular.ttf");
 
-	Walkbf.loadFromFile("Bgmusic/Foot.wav");
+	Walkbf.loadFromFile("../Resources/Bgmusic/Foot.wav");
 	Walk.setBuffer(Walkbf);
 	Walk.setVolume(25.f);
 
-	HPupsf.loadFromFile("Bgmusic/glassHp.wav");
+	HPupsf.loadFromFile("../Resources/Bgmusic/glassHp.wav");
 	Hpup.setBuffer(HPupsf);
 	Hpup.setVolume(25.f);
 }

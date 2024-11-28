@@ -117,7 +117,7 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="texture\logo.ico">
+    <Image Include="../Resources\texture\logo.ico">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

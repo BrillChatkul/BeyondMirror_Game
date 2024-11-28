@@ -16,23 +16,23 @@ Monster::Monster(sf::RectangleShape &ghostcharacter, sf::Texture *playerTexture,
 	attackrec.setSize(sf::Vector2f(100.f, 100.f));
 	attackrec.setOrigin(attackrec.getSize() / 2.f);
 	attackrec.setTexture(attacktx);
-	SoundAppersf.loadFromFile("Bgmusic/Ghost.wav");
+	SoundAppersf.loadFromFile("../Resources/Bgmusic/Ghost.wav");
 	SoundAppear.setBuffer(SoundAppersf);
 	SoundAppear.setVolume(50.f);
 
-	screamsf.loadFromFile("Bgmusic/scream.wav");
+	screamsf.loadFromFile("../Resources/Bgmusic/scream.wav");
 	scream.setBuffer(screamsf);
 	scream.setVolume(50.f);
 
-	laughsf.loadFromFile("Bgmusic/GhostLG.wav");
+	laughsf.loadFromFile("../Resources/Bgmusic/GhostLG.wav");
 	laugh.setBuffer(laughsf);
 	laugh.setVolume(50.f);
 
-	laugh02f.loadFromFile("Bgmusic/GHOSTLG02.wav");
+	laugh02f.loadFromFile("../Resources/Bgmusic/GHOSTLG02.wav");
 	laugh02.setBuffer(laugh02f);
 	laugh02.setVolume(25.f);
 
-	slashsf.loadFromFile("Bgmusic/slash.wav");
+	slashsf.loadFromFile("../Resources/Bgmusic/slash.wav");
 	slash.setBuffer(slashsf);
 	slash.setVolume(50.f);
 	

@@ -13,7 +13,7 @@ writeData::writeData()
 	cursor.setPosition(sf::Vector2f(655, 450.0f));
 	cursor.setFillColor(sf::Color::Black);
 
-	font.loadFromFile("font/EkkamaiNew-Regular.ttf");
+	font.loadFromFile("../Resources/font/EkkamaiNew-Regular.ttf");
 	text.setFont(font);
 	text.setCharacterSize(40);
 	text.setFillColor(sf::Color::Black);

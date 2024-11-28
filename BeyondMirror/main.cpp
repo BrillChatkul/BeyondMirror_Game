@@ -1,12 +1,14 @@
 ﻿#include <SFML/Graphics.hpp>
 #include<sfeMovie/Movie.hpp>
 #include<iostream>
-
 #include<sstream>
 #include<string>
 #include<fstream>
 #include<cstdio>
 #include<stdio.h>
+#include<unistd.h>
+#include<dlfcn.h>
+#include<libgen.h>
 
 #include"Animation.h"
 
@@ -25,80 +27,176 @@
 #include"BossBatttle.h"
 
 using namespace std;
+
+std::string getExecutablePath() {
+    // This function will return the directory path of the executable
+    Dl_info info;
+    if (dladdr((void*)getExecutablePath, &info)) {
+        return std::string(info.dli_fname);  // This gives the full path of the executable
+    }
+    return "";
+}
+
+std::string getExecutableDirectory() {
+    std::string executablePath = getExecutablePath();
+    if (executablePath.empty()) {
+        return "";
+    }
+    
+    // Now extract the directory path
+    size_t pos = executablePath.find_last_of('/');
+    if (pos != std::string::npos) {
+        return executablePath.substr(0, pos);
+    }
+    return "";
+}
+
 int main()
 {
+	
+	if(chdir(getExecutableDirectory().c_str()) == 0){
+		std::cout << "Current working directory set to current" << std::endl;
+	}else{
+		std::cerr << "Error set directory" << std::endl;
+	}
+	char pathBuffer[PATH_MAX];
+	if (getcwd(pathBuffer, sizeof(pathBuffer)) != NULL){
+		std::cout << "Current working" << pathBuffer << std::endl;
+	}else{
+		std::cerr << "Error directory" << std::endl;
+	}
 	////setup
-	sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "BeyondMirror" ,sf::Style::None);
+	sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "BeyondMirror" ,sf::Style::Fullscreen);
 	window.setMouseCursorVisible(false);
 	window.setFramerateLimit(60);
 
 	sf::Image Icon;
-	Icon.loadFromFile("texture/logo.png");
+	Icon.loadFromFile("../Resources/texture/logo.png");
 	window.setIcon(900, 900, Icon.getPixelsPtr());
 
 	///////////////////////////////////////////////////////////////////////////////////////////
 	
 	////Op video
 	sfe::Movie Op;
-	Op.openFromFile("video/Intro.mp4");
+	Op.openFromFile("../Resources/video/Intro.mp4");
 	Op.fit(0, 0, 1600, 900);
 	
 	
 	sfe::Movie mainDemo;
-	mainDemo.openFromFile("video/PreDemo.mp4");
+	mainDemo.openFromFile("../Resources/video/PreDemo.mp4");
 	mainDemo.fit(0, 0, 1600, 900);
 
 	sfe::Movie mainDemoA;
-	mainDemoA.openFromFile("video/PreDemo1.mp4");
+	mainDemoA.openFromFile("../Resources/video/PreDemo1.mp4");
 	mainDemoA.fit(0, 0, 1600, 900);
 
 	sfe::Movie mainDemoB;
-	mainDemoB.openFromFile("video/PreDemo2.mp4");
+	mainDemoB.openFromFile("../Resources/video/PreDemo2.mp4");
 	mainDemoB.fit(0, 0, 1600, 900);
 
 	sfe::Movie mainDemoC;
-	mainDemoC.openFromFile("video/PreDemo3.mp4");
+	mainDemoC.openFromFile("../Resources/video/PreDemo3.mp4");
 	mainDemoC.fit(0, 0, 1600, 900);
 
 	sfe::Movie Chapter0;
-	Chapter0.openFromFile("video/Chapter0.mp4");
+	Chapter0.openFromFile("../Resources/video/Chapter0.mp4");
 	Chapter0.fit(0, 0, 1600, 900);
 
+	sf::SoundBuffer bgChapter0sf;
+	sf::Sound bgChapter0;
+	bgChapter0sf.loadFromFile("../Resources/video/Chapter0.wav");
+	bgChapter0.setBuffer(bgChapter0sf);
+	bgChapter0.setVolume(100);
+
 	sfe::Movie Chapter1;
-	Chapter1.openFromFile("video/Chapter1.mp4");
+	Chapter1.openFromFile("../Resources/video/Chapter1.mp4");
 	Chapter1.fit(0, 0, 1600, 900);
 
+	sf::SoundBuffer bgChapter1sf;
+	sf::Sound bgChapter1;
+	bgChapter1sf.loadFromFile("../Resources/video/Chapter1.wav");
+	bgChapter1.setBuffer(bgChapter1sf);
+	bgChapter1.setVolume(100);
+
 	sfe::Movie Chapter2;
-	Chapter2.openFromFile("video/Chapter2.mp4");
+	Chapter2.openFromFile("../Resources/video/Chapter2.mp4");
 	Chapter2.fit(0, 0, 1600, 900);
 
+	sf::SoundBuffer bgChapter2sf;
+	sf::Sound bgChapter2;
+	bgChapter2sf.loadFromFile("../Resources/video/Chapter2.wav");
+	bgChapter2.setBuffer(bgChapter2sf);
+	bgChapter2.setVolume(100);
+
 	sfe::Movie Chapter3;
-	Chapter3.openFromFile("video/Beyond.mp4");
+	Chapter3.openFromFile("../Resources/video/Beyond.mp4");
 	Chapter3.fit(0, 0, 1600, 900);
 
+	sf::SoundBuffer bgChapter3sf;
+	sf::Sound bgChapter3;
+	bgChapter3sf.loadFromFile("../Resources/video/Beyond.wav");
+	bgChapter3.setBuffer(bgChapter3sf);
+	bgChapter3.setVolume(100);
+
 	sfe::Movie HpMemory1;
-	HpMemory1.openFromFile("video/Hs1.mp4");
+	HpMemory1.openFromFile("../Resources/video/Hs1.mp4");
 	HpMemory1.fit(0, 0, 1600, 900);
 
+	sf::SoundBuffer bgHpMemory1sf;
+	sf::Sound bgHpMemory1;
+	bgHpMemory1sf.loadFromFile("../Resources/video/Hs1.wav");
+	bgHpMemory1.setBuffer(bgHpMemory1sf);
+	bgHpMemory1.setVolume(100);
+
 	sfe::Movie HpMemory2;
-	HpMemory2.openFromFile("video/Hs2.mp4");
+	HpMemory2.openFromFile("../Resources/video/Hs2.mp4");
 	HpMemory2.fit(0, 0, 1600, 900);
 
+	sf::SoundBuffer bgHpMemory2sf;
+	sf::Sound bgHpMemory2;
+	bgHpMemory2sf.loadFromFile("../Resources/video/Hs2.wav");
+	bgHpMemory2.setBuffer(bgHpMemory2sf);
+	bgHpMemory2.setVolume(100);
+
 	sfe::Movie WalkwayMemory1;
-	WalkwayMemory1.openFromFile("video/walk1.mp4");
+	WalkwayMemory1.openFromFile("../Resources/video/walk1.mp4");
 	WalkwayMemory1.fit(0, 0, 1600, 900);
 
+	sf::SoundBuffer bgWalkwayMemory1sf;
+	sf::Sound bgWalkwayMemory1;
+	bgWalkwayMemory1sf.loadFromFile("../Resources/video/walk1.wav");
+	bgWalkwayMemory1.setBuffer(bgWalkwayMemory1sf);
+	bgWalkwayMemory1.setVolume(100);
+
 	sfe::Movie WalkwayMemory2;
-	WalkwayMemory2.openFromFile("video/walk2.mp4");
+	WalkwayMemory2.openFromFile("../Resources/video/walk2.mp4");
 	WalkwayMemory2.fit(0, 0, 1600, 900);
 
+	sf::SoundBuffer bgWalkwayMemory2sf;
+	sf::Sound bgWalkwayMemory2;
+	bgWalkwayMemory2sf.loadFromFile("../Resources/video/walk2.wav");
+	bgWalkwayMemory2.setBuffer(bgWalkwayMemory2sf);
+	bgWalkwayMemory2.setVolume(100);
+
 	sfe::Movie stMemory1;
-	stMemory1.openFromFile("video/st1.mp4");
+	stMemory1.openFromFile("../Resources/video/st1.mp4");
 	stMemory1.fit(0, 0, 1600, 900);
 
+	sf::SoundBuffer bgStMemory1sf;
+	sf::Sound bgStMemory1;
+	bgStMemory1sf.loadFromFile("../Resources/video/st1.wav");
+	bgStMemory1.setBuffer(bgStMemory1sf);
+	bgStMemory1.setVolume(100);
+
 	sfe::Movie stMemory2;
-	stMemory2.openFromFile("video/st2.mp4");
+	stMemory2.openFromFile("../Resources/video/st2.mp4");
 	stMemory2.fit(0, 0, 1600, 900);
+
+	sf::SoundBuffer bgStMemory2sf;
+	sf::Sound bgStMemory2;
+	bgStMemory2sf.loadFromFile("../Resources/video/st2.wav");
+	bgStMemory2.setBuffer(bgStMemory2sf);
+	bgStMemory2.setVolume(100);
 	
 	
 	bool videoPlay = false;
@@ -109,25 +207,25 @@ int main()
 
 	sf::SoundBuffer bgms01sf;
 	sf::Sound bgms01;
-	bgms01sf.loadFromFile("Bgmusic/mainmenu/tile01.wav");
+	bgms01sf.loadFromFile("../Resources/Bgmusic/mainmenu/tile01.wav");
 	bgms01.setBuffer(bgms01sf);
 	bgms01.setVolume(45);
 
 	sf::SoundBuffer bgms02sf;
 	sf::Sound bgms02;
-	bgms02sf.loadFromFile("Bgmusic/mainmenu/tile02.wav");
+	bgms02sf.loadFromFile("../Resources/Bgmusic/mainmenu/tile02.wav");
 	bgms02.setBuffer(bgms02sf);
 	bgms02.setVolume(50);
 
 	sf::SoundBuffer bgms03sf;
 	sf::Sound bgms03;
-	bgms03sf.loadFromFile("Bgmusic/mainmenu/tile03.wav");
+	bgms03sf.loadFromFile("../Resources/Bgmusic/mainmenu/tile03.wav");
 	bgms03.setBuffer(bgms03sf);
 	bgms03.setVolume(30);
 
 	sf::SoundBuffer bgms04sf;
 	sf::Sound bgms04;
-	bgms04sf.loadFromFile("Bgmusic/mainmenu/tile04.wav");
+	bgms04sf.loadFromFile("../Resources/Bgmusic/mainmenu/tile04.wav");
 	bgms04.setBuffer(bgms04sf);
 	bgms04.setVolume(25);
 
@@ -139,20 +237,20 @@ int main()
 	///////////////////////////////////////////////////////////////////////////////////////////
 	////effect
 	sf::Texture attackTexture;
-	attackTexture.loadFromFile("texture/attack.png");
+	attackTexture.loadFromFile("../Resources/texture/attack.png");
 
 	////player
 	sf::RectangleShape Player;
 	sf::Texture playerTexture;
-	playerTexture.loadFromFile("texture/character/player.png");
+	playerTexture.loadFromFile("../Resources/texture/character/player.png");
 	player playercharacter(Player, &playerTexture);
 
 	sf::Texture playerTexture2;
-	playerTexture2.loadFromFile("texture/character/PlayerG.png");///////////Need to edit texture
+	playerTexture2.loadFromFile("../Resources/texture/character/PlayerG.png");///////////Need to edit texture
 	FinalPlayer playercharacterG(Player, &playerTexture2,&attackTexture);
 
 	sf::Texture playerTextureReal;
-	playerTextureReal.loadFromFile("texture/character/PlayerR.png");///////////Need to edit texture
+	playerTextureReal.loadFromFile("../Resources/texture/character/PlayerR.png");///////////Need to edit texture
 	FinalPlayer playercharacterR(Player, &playerTextureReal,&attackTexture);
 
 	int playerChoose = 0;
@@ -166,7 +264,7 @@ int main()
 	sf::RectangleShape HP(sf::Vector2f(60.0f, 150.0f));
 	HP.setPosition(250, 30);
 	sf::Texture HPBAR;
-	HPBAR.loadFromFile("texture/HP.png");
+	HPBAR.loadFromFile("../Resources/texture/HP.png");
 	HP.setTexture(&HPBAR);
 	Animation animationHP(&HPBAR, sf::Vector2u(4, 4), 0.15f);
 	
@@ -176,14 +274,14 @@ int main()
 	
 	sf::RectangleShape motionCharacter(sf::Vector2f(200.0f, 200.0f));
 	sf::Texture mCharacter;
-	mCharacter.loadFromFile("texture/Frchar.png");
+	mCharacter.loadFromFile("../Resources/texture/Frchar.png");
 	motionCharacter.setTexture(&mCharacter);
 	Animation animationmotion(&mCharacter, sf::Vector2u(4, 4), 0.3f);
 	int checkMotion = 0;
 	
 	sf::RectangleShape themirror(sf::Vector2f(200.0f, 200.0f));
 	sf::Texture mirror;
-	mirror.loadFromFile("texture/mirror.png");
+	mirror.loadFromFile("../Resources/texture/mirror.png");
 	themirror.setTexture(&mirror);
 
 	
@@ -192,7 +290,7 @@ int main()
 
 	sf::RectangleShape light(sf::Vector2f(1600.0f, 900.0f));
 	sf::Texture LIGHT;
-	LIGHT.loadFromFile("texture/light-on.png");
+	LIGHT.loadFromFile("../Resources/texture/light-on.png");
 	light.setTexture(&LIGHT);
 
 	MedicDisplay medicdisplay;
@@ -204,7 +302,7 @@ int main()
 	BossHealthGate.setOrigin(BossHealthGate.getSize() / 2.f);
 	BossHealthGate.setPosition(800, 200);
 	sf::Texture HpBossBar;
-	HpBossBar.loadFromFile("texture/HP.png");
+	HpBossBar.loadFromFile("../Resources/texture/HP.png");
 	BossHealthGate.setTexture(&HpBossBar);
 	
 	Animation BossHpAnimation(&HpBossBar, sf::Vector2u(4, 4), 0.15f);
@@ -214,7 +312,7 @@ int main()
 	BossinterfaceG.setOrigin(BossinterfaceG.getSize() / 2.f);
 	BossinterfaceG.setPosition(800, 100);
 	sf::Texture BossInterfaceGTx;
-	BossInterfaceGTx.loadFromFile("texture/character/BossG.png");
+	BossInterfaceGTx.loadFromFile("../Resources/texture/character/BossG.png");
 	BossinterfaceG.setTexture(&BossInterfaceGTx);
 	
 	sf::RectangleShape BossinterfaceR;
@@ -222,7 +320,7 @@ int main()
 	BossinterfaceR.setOrigin(BossinterfaceG.getSize() / 2.f);
 	BossinterfaceR.setPosition(800, 100);
 	sf::Texture BossInterfaceRTx;
-	BossInterfaceRTx.loadFromFile("texture/character/BossR.png");
+	BossInterfaceRTx.loadFromFile("../Resources/texture/character/BossR.png");
 	BossinterfaceR.setTexture(&BossInterfaceRTx);
 
 	///////////////////////////////////////////////////////////////////////////////////////////
@@ -230,7 +328,7 @@ int main()
 	////Monster
 	sf::RectangleShape monsterRec;
 	sf::Texture monsterTexture;
-	monsterTexture.loadFromFile("texture/character/Death.png");
+	monsterTexture.loadFromFile("../Resources/texture/character/Death.png");
 	
 	
 	Monster Ghost(monsterRec, &monsterTexture,&attackTexture);
@@ -239,8 +337,8 @@ int main()
 	sf::RectangleShape BossRec;
 	sf::Texture BossRTexture;
 	sf::Texture BossGTexture;
-	BossRTexture.loadFromFile("texture/character/PlayerR.png");
-	BossGTexture.loadFromFile("texture/character/PlayerG.png");
+	BossRTexture.loadFromFile("../Resources/texture/character/PlayerR.png");
+	BossGTexture.loadFromFile("../Resources/texture/character/PlayerG.png");
 	
 	BossType BossG(BossRec, &BossGTexture, &attackTexture);
 	BossType BossR(BossRec, &BossRTexture, &attackTexture);
@@ -260,9 +358,9 @@ int main()
 	sf::View MenuView(sf::Vector2f(800.f, 450.f), sf::Vector2f(1600.0f, 900.0f));
 
 	////Save
-	std::string Slot1 = "save/slot1.txt";
-	std::string Slot2 = "save/slot2.txt";
-	std::string Slot3 = "save/slot3.txt";
+	std::string Slot1 = "../Resources/save/slot1.txt";
+	std::string Slot2 = "../Resources/save/slot2.txt";
+	std::string Slot3 = "../Resources/save/slot3.txt";
 
 	
 	
@@ -299,30 +397,30 @@ int main()
 	int turturialCount = 0;
 
 	sf::Texture turTx0;
-	turTx0.loadFromFile("texture/Tur01.png");
+	turTx0.loadFromFile("../Resources/texture/Tur01.png");
 	sf::Sprite turtorial0;
 	turtorial0.setTexture(turTx0);
 	
 
 	sf::Texture turTx1;
-	turTx1.loadFromFile("texture/Tur02.png");
+	turTx1.loadFromFile("../Resources/texture/Tur02.png");
 	sf::Sprite turtorial1;
 	turtorial1.setTexture(turTx1);
 
 	sf::Texture turTx2;
-	turTx2.loadFromFile("texture/Tur03.png");
+	turTx2.loadFromFile("../Resources/texture/Tur03.png");
 	sf::Sprite turtorial2;
 	turtorial2.setTexture(turTx2);
 
 	sf::Texture turTx3;
-	turTx3.loadFromFile("texture/Tur04.png");
+	turTx3.loadFromFile("../Resources/texture/Tur04.png");
 	sf::Sprite turtorial3;
 	turtorial3.setTexture(turTx3);
 
 
 	////system
 	sf::Font fontgame;
-	fontgame.loadFromFile("font/EkkamaiNew-Regular.ttf");
+	fontgame.loadFromFile("../Resources/font/EkkamaiNew-Regular.ttf");
 	sf::Clock deltaclock;
 	sf::Clock forfade;
 	float deltatime;
@@ -453,16 +551,34 @@ int main()
 	bool WhilevideoEnding = false;
 
 	sfe::Movie EndingA;
-	EndingA.openFromFile("video/EndA.mp4");
+	EndingA.openFromFile("../Resources/video/EndA.mp4");
 	EndingA.fit(0, 0, 1600, 900);
+	
+	sf::SoundBuffer bgEndingAsf;
+	sf::Sound bgEndingA;
+	bgEndingAsf.loadFromFile("../Resources/video/EndA.wav");
+	bgEndingA.setBuffer(bgEndingAsf);
+	bgEndingA.setVolume(100);
 
 	sfe::Movie EndingB;
-	EndingB.openFromFile("video/EndC.mp4");
+	EndingB.openFromFile("../Resources/video/EndC.mp4");
 	EndingB.fit(0, 0, 1600, 900);
 
+	sf::SoundBuffer bgEndingBsf;
+	sf::Sound bgEndingB;
+	bgEndingBsf.loadFromFile("../Resources/video/EndC.wav");
+	bgEndingB.setBuffer(bgEndingBsf);
+	bgEndingB.setVolume(100);
+
 	sfe::Movie EndingC;
-	EndingC.openFromFile("video/EndB.mp4");
+	EndingC.openFromFile("../Resources/video/EndB.mp4");
 	EndingC.fit(0, 0, 1600, 900);
+
+	sf::SoundBuffer bgEndingCsf;
+	sf::Sound bgEndingC;
+	bgEndingCsf.loadFromFile("../Resources/video/EndB.wav");
+	bgEndingC.setBuffer(bgEndingCsf);
+	bgEndingC.setVolume(100);
 
 	
 	bool openingscen =false;
@@ -553,7 +669,7 @@ int main()
 			window.setView(MenuView); 
 			player playercharacter(Player, &playerTexture);
 
-			file.open("save/BG.txt");
+			file.open("../Resources/save/BG.txt");
 			file >> EndingRe;
 			file.close();
 		}
@@ -640,15 +756,25 @@ int main()
 			whilePlayMM = false;
 			turtorial = false;
 			Chapter0.stop();
+			bgChapter0.stop();
 			Chapter1.stop();
+			bgChapter1.stop();
 			Chapter2.stop();
+			bgChapter2.stop();
 			Chapter3.stop();
+			bgChapter3.stop();
 			HpMemory1.stop();
+			bgHpMemory1.stop();
 			HpMemory2.stop();
+			bgHpMemory2.stop();
 			stMemory1.stop();
+			bgStMemory1.stop();
 			stMemory2.stop();
+			bgStMemory2.stop();
 			WalkwayMemory1.stop();
+			bgWalkwayMemory1.stop();
 			WalkwayMemory2.stop();//////////////////////Need more Map
+			bgWalkwayMemory2.stop();
 
 			window.clear();
 			if (EndingRe == 0)
@@ -685,7 +811,7 @@ int main()
 				Mainmenu = false;
 				Setup = false;
 				EndingRe = 0;
-				file.open("save/BG.txt");
+				file.open("../Resources/save/BG.txt");
 				file << EndingRe;
 				file.close();
 				videoPlay = true;
@@ -695,6 +821,7 @@ int main()
 				videoPlay = false;
 				Chapter0.play();
 				whilePlay = true;
+				bgChapter0.play();
 			}
 			if (whilePlay == true && level == 0)
 			{
@@ -706,6 +833,7 @@ int main()
 
 				if (Chapter0.getStatus() == sfe::Status::Stopped || sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 				{
+					bgChapter0.stop();
 					Chapter0.stop();
 					whilePlay = false;
 					LEVEL0 = true;
@@ -788,19 +916,19 @@ int main()
 					if (loadSlot == 1 || loadSlot == 2 || loadSlot == 3)
 					{
 						if (loadSlot == 1) {
-							remove("save/slot1.text");
+							remove("../Resources/save/slot1.text");
 							reWrite.open(Slot1);
 							reWrite << level << " " << Name << " \n" << Key1 << " " << Key2 << " " << key3 << " " << Havedoll << " " << scoreCount << " " << medic;
 							reWrite.close();
 						}
 						else if (loadSlot == 2) {
-							remove("save/slot2.text");
+							remove("../Resources/save/slot2.text");
 							reWrite.open(Slot2);
 							reWrite << level << " " << Name << " \n" << Key1 << " " << Key2 << " " << key3 << " " << Havedoll << " " << scoreCount << " " << medic;
 							reWrite.close();
 						}
 						else if (loadSlot == 3) {
-							remove("save/slot3.text");
+							remove("../Resources/save/slot3.text");
 							reWrite.open(Slot3);
 							reWrite << level << " " << Name << " \n" << Key1 << " " << Key2 << " " << key3 << " " << Havedoll << " " << scoreCount << " " << medic;
 							reWrite.close();
@@ -821,6 +949,7 @@ int main()
 			{
 				videoPlay = false;
 				Chapter1.play();
+				bgChapter1.play();
 				whilePlay = true;
 			}
 			if (whilePlay == true && level == 1)
@@ -834,6 +963,7 @@ int main()
 				if (Chapter1.getStatus() == sfe::Status::Stopped || sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 				{
 					Chapter1.stop();
+					bgChapter1.stop();
 					whilePlay = false;
 					mapLevel1.setup();
 					playercharacter.position(Player, 600, 600, 0, deltatime);
@@ -910,19 +1040,19 @@ int main()
 					if (loadSlot == 1 || loadSlot == 2 || loadSlot == 3)
 					{
 						if (loadSlot == 1) {
-							remove("save/slot1.text");
+							remove("../Resources/save/slot1.text");
 							reWrite.open(Slot1);
 							reWrite << level << " " << Name << " \n" << Key1 << " " << Key2 << " " << key3 << " " << Havedoll << " " << scoreCount << " " << medic;
 							reWrite.close();
 						}
 						else if (loadSlot == 2) {
-							remove("save/slot2.text");
+							remove("../Resources/save/slot2.text");
 							reWrite.open(Slot2);
 							reWrite << level << " " << Name << " \n" << Key1 << " " << Key2 << " " << key3 << " " << Havedoll << " " << scoreCount << " " << medic;
 							reWrite.close();
 						}
 						else if (loadSlot == 3) {
-							remove("save/slot3.text");
+							remove("../Resources/save/slot3.text");
 							reWrite.open(Slot3);
 							reWrite << level << " " << Name << " \n" << Key1 << " " << Key2 << " " << key3 << " " << Havedoll << " " << scoreCount << " " << medic;
 							reWrite.close();
@@ -963,6 +1093,7 @@ int main()
 			if (videoPlayMM == 1 && Key1 == 1)/////////////////////////////////////////StudentRoom unlock key1
 			{
 				stMemory1.play();
+				bgStMemory1.play();
 				videoPlayMM = false;
 				whilePlayMM = true;
 			}
@@ -974,6 +1105,7 @@ int main()
 				{
 					Key1 = 2;
 					stMemory1.stop();
+					bgStMemory1.stop();
 					whilePlayMM = false;
 					LEVEL1 = true;
 				}
@@ -985,6 +1117,7 @@ int main()
 			if (videoPlayMM == 1 && Key2 == 1)/////////////////////////////////////////////HospitalRoom unlock key2
 			{
 				HpMemory1.play();
+				bgHpMemory1.play();
 				videoPlayMM = false;
 				whilePlayMM = true;
 			}
@@ -996,6 +1129,7 @@ int main()
 				{
 					Key2 = 2;
 					HpMemory1.stop();
+					bgHpMemory1.stop();
 					whilePlayMM = false;
 					LEVEL1 = true;
 				}
@@ -1007,6 +1141,7 @@ int main()
 			if (videoPlayMM == 1 && key3 == 1)/////////////////////////////////////////////Walkway unlock key3
 			{
 				WalkwayMemory1.play();
+				bgWalkwayMemory1.play();
 				videoPlayMM = false;
 				whilePlayMM = true;
 			}
@@ -1018,6 +1153,7 @@ int main()
 				{
 					key3 = 2;
 					WalkwayMemory1.stop();
+					bgWalkwayMemory1.stop();
 					whilePlayMM = false;
 					LEVEL1 = true;
 				}
@@ -1037,6 +1173,7 @@ int main()
 			{
 				videoPlay = false;
 				Chapter2.play();
+				bgChapter2.play();
 				whilePlay = true;
 			}
 			if (whilePlay == true && level == 2)
@@ -1050,6 +1187,7 @@ int main()
 				if (Chapter2.getStatus() == sfe::Status::Stopped || sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 				{
 					Chapter2.stop();
+					bgChapter2.stop();
 					whilePlay = false;
 					mapLevel2.setup();
 					playercharacter.position(Player, 2000, 3200, 0, deltatime);
@@ -1130,19 +1268,19 @@ int main()
 					if (loadSlot == 1 || loadSlot == 2 || loadSlot == 3)
 					{
 						if (loadSlot == 1) {
-							remove("save/slot1.text");
+							remove("../Resources/save/slot1.text");
 							reWrite.open(Slot1);
 							reWrite << level << " " << Name << " \n" << Key1 << " " << Key2 << " " << key3 << " " << Havedoll << " " << scoreCount << " " << medic;
 							reWrite.close();
 						}
 						else if (loadSlot == 2) {
-							remove("save/slot2.text");
+							remove("../Resources/save/slot2.text");
 							reWrite.open(Slot2);
 							reWrite << level << " " << Name << " \n" << Key1 << " " << Key2 << " " << key3 << " " << Havedoll << " " << scoreCount << " " << medic;
 							reWrite.close();
 						}
 						else if (loadSlot == 3) {
-							remove("save/slot3.text");
+							remove("../Resources/save/slot3.text");
 							reWrite.open(Slot3);
 							reWrite << level << " " << Name << " \n" << Key1 << " " << Key2 << " " << key3 << " " << Havedoll << " " << scoreCount << " " << medic;
 							reWrite.close();
@@ -1183,6 +1321,7 @@ int main()
 			if (videoPlayMM == 1 && Key1 == 3)/////////////////////////////////////////StudentRoom unlock key1
 			{
 				stMemory2.play();
+				bgStMemory2.play();
 				videoPlayMM = false;
 				whilePlayMM = true;
 			}
@@ -1194,6 +1333,7 @@ int main()
 				{
 					Key1 = 4;
 					stMemory2.stop();
+					bgStMemory2.stop();
 					whilePlayMM = false;
 					LEVEL2 = true;
 				}
@@ -1205,6 +1345,7 @@ int main()
 			if (videoPlayMM == 1 && Key2 == 3)/////////////////////////////////////////////HospitalRoom unlock key2
 			{
 				HpMemory2.play();
+				bgHpMemory2.play();
 				videoPlayMM = false;
 				whilePlayMM = true;
 			}
@@ -1216,6 +1357,7 @@ int main()
 				{
 					Key2 = 4;
 					HpMemory2.stop();
+					bgHpMemory2.stop();
 					whilePlayMM = false;
 					LEVEL2 = true;
 				}
@@ -1227,6 +1369,7 @@ int main()
 			if (videoPlayMM == 1 && key3 == 3)/////////////////////////////////////////////Walkway unlock key3
 			{
 				WalkwayMemory2.play();
+				bgWalkwayMemory2.play();
 				videoPlayMM = false;
 				whilePlayMM = true;
 			}
@@ -1238,6 +1381,7 @@ int main()
 				{
 					key3 = 4;
 					WalkwayMemory2.stop();
+					bgWalkwayMemory2.stop();
 					whilePlayMM = false;
 					LEVEL2 = true;
 				}
@@ -1257,6 +1401,7 @@ int main()
 			{
 				videoPlay = false;
 				Chapter3.play();
+				bgChapter3.play();
 				whilePlay = true;
 			}
 			if (whilePlay == true && level == 3)
@@ -1270,6 +1415,7 @@ int main()
 				if (Chapter3.getStatus() == sfe::Status::Stopped || sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 				{
 					Chapter3.stop();
+					bgChapter2.stop();
 					whilePlay = false;
 					finalboss.setup();
 					player playercharacter(Player, &playerTexture);
@@ -1680,14 +1826,14 @@ int main()
 		if (GameEnd == true)///////////////////////////////////////////////////////////////////////Score
 		{
 			if (EndingChoose == true) {
-				if (Key1 + Key2 + key3 + Havedoll == 13 && playerChoose == 3)
+				if (Key1 + Key2 + key3 + Havedoll >= 9 && playerChoose == 3)
 				{
 					////Ending1 A future
 					scoreCount += 1500;
 					ending.setString("Ending (A) future");
 					EndingRe = 1;
 				}
-				else if (Havedoll == 1 && Key1 + Key2 + key3 + Havedoll != 13 && playerChoose == 3)
+				else if (Havedoll == 1 && Key1 + Key2 + key3 + Havedoll < 9 && playerChoose == 3)
 				{
 					////Ending2 Be the man you don't want to be
 					scoreCount += 700;
@@ -1750,7 +1896,7 @@ int main()
 			}
 						
 			if (saveScore == true) {//////////////////////////////////////////Save score
-				file.open("save/score.txt");
+				file.open("../Resources/save/score.txt");
 				file >> lineScore;
 				if (lineScore != -1) {
 					for (int j = 0; j <= lineScore; j++)
@@ -1765,7 +1911,7 @@ int main()
 					}
 				}
 				file.close();
-				remove("save/score.txt");
+				remove("../Resources/save/score.txt");
 				if (lineScore < 4)
 				{
 					lineScore++;
@@ -1804,12 +1950,12 @@ int main()
 					}
 				}
 
-				file.open("save/BG.txt");
+				file.open("../Resources/save/BG.txt");
 				file << EndingRe;
 				file.close();
 
 				
-				reWrite.open("save/score.txt");
+				reWrite.open("../Resources/save/score.txt");
 				reWrite << lineScore << "\n";
 				for (int j = 0; j <= lineScore; j++)
 				{
@@ -1824,19 +1970,19 @@ int main()
 				if (loadSlot == 1 || loadSlot == 2 || loadSlot == 3)
 				{
 					if (loadSlot == 1) {
-						remove("save/slot1.text");
+						remove("../Resources/save/slot1.text");
 						reWrite.open(Slot1);
 						reWrite << "0" << " " << "EMPTYSLOT" << " \n" << "0" << " " << "0" << " " << "0" << " " << "0" << " " << "0" << " " << "0";
 						reWrite.close();
 					}
 					else if (loadSlot == 2) {
-						remove("save/slot2.text");
+						remove("../Resources/save/slot2.text");
 						reWrite.open(Slot2);
 						reWrite << "0" << " " << "EMPTYSLOT" << " \n" << "0" << " " << "0" << " " << "0" << " " << "0" << " " << "0" << " " << "0";
 						reWrite.close();
 					}
 					else if (loadSlot == 3) {
-						remove("save/slot3.text");
+						remove("../Resources/save/slot3.text");
 						reWrite.open(Slot3);
 						reWrite << "0" << " " << "EMPTYSLOT" << " \n" << "0" << " " << "0" << " " << "0" << " " << "0" << " " << "0" << " " << "0";
 						reWrite.close();
@@ -1853,14 +1999,17 @@ int main()
 				if (EndingRe == 1)
 				{
 					EndingA.play();
+					bgEndingA.play();
 				}
 				else if (EndingRe == 2)
 				{
 					EndingB.play();
+					bgEndingB.play();
 				}
 				else if (EndingRe == 3)
 				{
 					EndingC.play();
+					bgEndingC.play();
 				}
 				videoEnding = false;
 				WhilevideoEnding = true;
@@ -1912,6 +2061,9 @@ int main()
 				EndingA.stop();
 				EndingB.stop();
 				EndingC.stop();
+				bgEndingA.stop();
+				bgEndingB.stop();
+				bgEndingC.stop();
 				if(fadetime > 0)
 				{
 					if (fade.asMilliseconds() > 10)

@@ -5,7 +5,7 @@
 Menu::Menu()
 {
 	////load font
-	fontgame.loadFromFile("font/EkkamaiNew-Regular.ttf");
+	fontgame.loadFromFile("../Resources/font/EkkamaiNew-Regular.ttf");
 
 	////Game         
 	Logo.setFont(fontgame);
@@ -156,7 +156,7 @@ void Menu::update(sf::RenderWindow &window, sf::Event & event,int &slot)
 
 			////load data
 			int CountLine;
-			score.open("save/score.txt");
+			score.open("../Resources/save/score.txt");
 			score >> CountLine;
 			for (int j = 0; j <= 4; j++)
 			{
@@ -181,13 +181,13 @@ void Menu::update(sf::RenderWindow &window, sf::Event & event,int &slot)
 			if (scorerank[4] != 0) { numberscore5.setString(ss4.str()); }
 
 			////load slot data
-			slot1.open("save/slot1.txt");
+			slot1.open("../Resources/save/slot1.txt");
 			slot1 >> levelSlot1 >> NameforSlot1;
 
-			slot2.open("save/slot2.txt");
+			slot2.open("../Resources/save/slot2.txt");
 			slot2 >> levelSlot2 >> NameforSlot2;
 
-			slot3.open("save/slot3.txt");
+			slot3.open("../Resources/save/slot3.txt");
 			slot3 >> levelSlot3 >> NameforSlot3;
 			slot1.close();
 			slot2.close();
@@ -418,29 +418,29 @@ void Menu::update(sf::RenderWindow &window, sf::Event & event,int &slot)
 		{
 			if (selectSlot == 1)
 			{
-				remove("save/slot1.txt");
-				RewriteSave.open("save/slot1Rewrite.txt");
+				remove("../Resources/save/slot1.txt");
+				RewriteSave.open("../Resources/save/slot1Rewrite.txt");
 				RewriteSave << "0" << " " << CreateName << " " <<"\n" << "0" << " " << "0" << " " << "0" << " " << "0" << " " << "0" << " " << "0";
 				RewriteSave.close();
-				std::rename("save/slot1Rewrite.txt", "save/slot1.txt");
+				std::rename("../Resources/save/slot1Rewrite.txt", "../Resources/save/slot1.txt");
 				slot = 1;
 			}
 			if (selectSlot == 2)
 			{
-				remove("save/slot2.txt");
-				RewriteSave.open("save/slot2Rewrite.txt");
+				remove("../Resources/save/slot2.txt");
+				RewriteSave.open("../Resources/save/slot2Rewrite.txt");
 				RewriteSave << "0" << " " << CreateName << " " << "\n" << "0" << " " << "0" << " " << "0" << " " << "0" << " " << "0" << " " << "0";
 				RewriteSave.close();
-				std::rename("save/slot2Rewrite.txt", "save/slot2.txt");
+				std::rename("../Resources/save/slot2Rewrite.txt", "../Resources/save/slot2.txt");
 				slot = 2;
 			}
 			if (selectSlot == 3)
 			{
-				remove("save/slot3.txt");
-				RewriteSave.open("save/slot3Rewrite.txt");
+				remove("../Resources/save/slot3.txt");
+				RewriteSave.open("../Resources/save/slot3Rewrite.txt");
 				RewriteSave << "0" << " " << CreateName << " " << "\n" << "0" << " " << "0" << " " << "0" << " " << "0" << " " << "0" << " " << "0";
 				RewriteSave.close();
-				std::rename("save/slot3Rewrite.txt", "save/slot3.txt");
+				std::rename("../Resources/save/slot3Rewrite.txt", "../Resources/save/slot3.txt");
 				slot = 3;
 			}
 			NewGame = false;

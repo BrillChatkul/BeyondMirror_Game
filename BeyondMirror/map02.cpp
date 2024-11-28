@@ -12,7 +12,7 @@ map02::map02()
 	wardrope.setSize(sf::Vector2f(100.0f, 100.0f));
 
 	////health
-	HealthHp.loadFromFile("texture/HpPotion.png");
+	HealthHp.loadFromFile("../Resources/texture/HpPotion.png");
 	healthDrope.setSize(sf::Vector2f(50.0f, 50.0f));
 	//healthDrope.setFillColor(sf::Color(195, 105, 105, 150));
 	healthDrope.setTexture(&HealthHp);
@@ -20,7 +20,7 @@ map02::map02()
 
 	////Exmap 2floor texture
 	maprec.setSize(sf::Vector2f(10000.0f, 10000.0f));
-	map.loadFromFile("texture/map/mapLVL1/MapEp1.png");
+	map.loadFromFile("../Resources/texture/map/mapLVL1/MapEp1.png");
 	maprec.setTexture(&map);
 	
 	////Exmap 2floor array
@@ -46,7 +46,7 @@ map02::map02()
 
 	////Exmap 1floor texture
 	maprec1.setSize(sf::Vector2f(10000.0f, 10000.0f));
-	map1.loadFromFile("texture/map/mapLVL1/MapEp1_2.png");
+	map1.loadFromFile("../Resources/texture/map/mapLVL1/MapEp1_2.png");
 	maprec1.setTexture(&map1);
 
 	////Exmap 1floor array
@@ -101,7 +101,7 @@ map02::map02()
 	
 
 	/////interect
-	fontgame.loadFromFile("font/EkkamaiNew-Regular.ttf");
+	fontgame.loadFromFile("../Resources/font/EkkamaiNew-Regular.ttf");
 	Interect.setCharacterSize(50);
 	Interect.setFont(fontgame);
 	Interect.setFillColor(sf::Color::White);
@@ -109,10 +109,10 @@ map02::map02()
 	Interect.setOrigin(Interect.getGlobalBounds().width / 2.f, Interect.getGlobalBounds().height / 2.f);
 	Interect.setPosition(800, 650);
 
-	backgroundMssf.loadFromFile("Bgmusic/normalsong01.wav");
-	chasesf.loadFromFile("Bgmusic/chase.wav");
-	chaseEdsf.loadFromFile("Bgmusic/chaseEd.wav");
-	wardropesf.loadFromFile("Bgmusic/wardrope.wav");
+	backgroundMssf.loadFromFile("../Resources/Bgmusic/normalsong01.wav");
+	chasesf.loadFromFile("../Resources/Bgmusic/chase.wav");
+	chaseEdsf.loadFromFile("../Resources/Bgmusic/chaseEd.wav");
+	wardropesf.loadFromFile("../Resources/Bgmusic/wardrope.wav");
 	
 	backgroundMs.setBuffer(backgroundMssf);
 	chase.setBuffer(chasesf);
@@ -127,17 +127,17 @@ map02::map02()
 
 	/////Key interest
 
-	stroomCo.loadFromFile("texture/map/mapLVL1/StudentRoomCo.png");
-	HospitalCo.loadFromFile("texture/map/mapLVL1/HospitalCo.png");
-	WalkWCo.loadFromFile("texture/map/mapLVL1/WalkwayCo.png");
+	stroomCo.loadFromFile("../Resources/texture/map/mapLVL1/StudentRoomCo.png");
+	HospitalCo.loadFromFile("../Resources/texture/map/mapLVL1/HospitalCo.png");
+	WalkWCo.loadFromFile("../Resources/texture/map/mapLVL1/WalkwayCo.png");
 	
-	KeytoMainTx.loadFromFile("texture/Mainkey.png");
+	KeytoMainTx.loadFromFile("../Resources/texture/Mainkey.png");
 	KeytoMain.setTexture(&KeytoMainTx);
 	
-	KeyStroomTx.loadFromFile("texture/Exam.png");
+	KeyStroomTx.loadFromFile("../Resources/texture/Exam.png");
 	KeyStroom.setTexture(&KeyStroomTx);
 
-	KeytoUnlockHospitatx.loadFromFile("texture/keycard.png");
+	KeytoUnlockHospitatx.loadFromFile("../Resources/texture/keycard.png");
 	KeyHospitalroom.setTexture(&KeytoUnlockHospitatx);
 
 	////ract

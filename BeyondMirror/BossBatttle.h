@@ -66,6 +66,8 @@ private:
 
 	////video last fight
 	sfe::Movie Trueintro;
+	sf::SoundBuffer bgTrueintrosf;
+	sf::Sound bgTrueintro;
 	bool playvideo = false;
 
 	////choose character

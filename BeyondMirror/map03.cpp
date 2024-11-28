@@ -12,7 +12,7 @@ map03::map03()
 	wardrope.setSize(sf::Vector2f(100.0f, 100.0f));
 
 	////health
-	HealthHp.loadFromFile("texture/HpPotion.png");
+	HealthHp.loadFromFile("../Resources/texture/HpPotion.png");
 	healthDrope.setSize(sf::Vector2f(50.0f, 50.0f));
 	//healthDrope.setFillColor(sf::Color(195, 105, 105, 150));
 	healthDrope.setTexture(&HealthHp);
@@ -20,7 +20,7 @@ map03::map03()
 
 	////Exmap 2floor texture
 	maprec.setSize(sf::Vector2f(10000.0f, 10000.0f));
-	map.loadFromFile("texture/map/mapLVL2/MapLv2.5.png");
+	map.loadFromFile("../Resources/texture/map/mapLVL2/MapLv2.5.png");
 	maprec.setTexture(&map);
 
 	////Exmap 2floor array
@@ -46,7 +46,7 @@ map03::map03()
 
 	////Exmap 1floor texture
 	maprec1.setSize(sf::Vector2f(10000.0f, 10000.0f));
-	map1.loadFromFile("texture/map/mapLVL2/MapLv2.png");
+	map1.loadFromFile("../Resources/texture/map/mapLVL2/MapLv2.png");
 	maprec1.setTexture(&map1);
 
 	////Exmap 1floor array
@@ -105,7 +105,7 @@ map03::map03()
 
 
 	/////interect
-	fontgame.loadFromFile("font/EkkamaiNew-Regular.ttf");
+	fontgame.loadFromFile("../Resources/font/EkkamaiNew-Regular.ttf");
 	Interect.setCharacterSize(50);
 	Interect.setFont(fontgame);
 	Interect.setFillColor(sf::Color::White);
@@ -113,10 +113,10 @@ map03::map03()
 	Interect.setOrigin(Interect.getGlobalBounds().width / 2.f, Interect.getGlobalBounds().height / 2.f);
 	Interect.setPosition(800, 650);
 
-	backgroundMssf.loadFromFile("Bgmusic/normalsong01.wav");
-	chasesf.loadFromFile("Bgmusic/chase.wav");
-	chaseEdsf.loadFromFile("Bgmusic/chaseEd.wav");
-	wardropesf.loadFromFile("Bgmusic/wardrope.wav");
+	backgroundMssf.loadFromFile("../Resources/Bgmusic/normalsong01.wav");
+	chasesf.loadFromFile("../Resources/Bgmusic/chase.wav");
+	chaseEdsf.loadFromFile("../Resources/Bgmusic/chaseEd.wav");
+	wardropesf.loadFromFile("../Resources/Bgmusic/wardrope.wav");
 
 	backgroundMs.setBuffer(backgroundMssf);
 	chase.setBuffer(chasesf);
@@ -145,7 +145,7 @@ map03::map03()
 
 	Doll.setSize(sf::Vector2f(50, 50));
 	Doll.setPosition(4400, 2500);
-	DollTx.loadFromFile("texture/Doll.png");
+	DollTx.loadFromFile("../Resources/texture/Doll.png");
 	Doll.setTexture(&DollTx);
 }
 

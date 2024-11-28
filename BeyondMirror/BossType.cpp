@@ -17,15 +17,15 @@ BossType::BossType(sf::RectangleShape &ghostcharacter, sf::Texture *playerTextur
 	attackrec.setOrigin(attackrec.getSize() / 2.f);
 	attackrec.setTexture(attacktx);
 	
-	SoundAppersf.loadFromFile("Bgmusic/Boss.wav");
+	SoundAppersf.loadFromFile("../Resources/Bgmusic/Boss.wav");
 	SoundAppear.setBuffer(SoundAppersf);
 	SoundAppear.setVolume(50.f);
 
-	slashsf.loadFromFile("Bgmusic/slash.wav");
+	slashsf.loadFromFile("../Resources/Bgmusic/slash.wav");
 	slash.setBuffer(slashsf);
 	slash.setVolume(50.f);
 
-	Walkbf.loadFromFile("Bgmusic/Foot.wav");
+	Walkbf.loadFromFile("../Resources/Bgmusic/Foot.wav");
 	Walk.setBuffer(Walkbf);
 	Walk.setVolume(25.f);
 }
